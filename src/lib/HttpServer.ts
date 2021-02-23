@@ -1,8 +1,6 @@
-import { timeStamp } from "console";
 import * as Express from "express";
 import * as Http from "http";
 
-import * as generalRouter from "../routes/GeneralRoute";
 import { IHttpServer } from "./IHttpServer";
 
 export class HttpServer implements IHttpServer{
