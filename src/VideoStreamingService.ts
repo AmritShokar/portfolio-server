@@ -1,6 +1,9 @@
 import * as Express from "express";
 import { HttpServer } from "./lib/HttpServer";
 
+import { GeneralController } from "./controllers/GeneralController";
+import { GeneralRouter } from "./routes/GeneralRoute";
+
 export class VideoStreamingService {
     public readonly express: Express.Application
     public readonly server: HttpServer;
@@ -23,6 +26,12 @@ export class VideoStreamingService {
 
         // lastly
         // this.driver.registerRoute(generalRouter)
+
+        const generalController = new GeneralController();
+        const generalRouter = new GeneralRouter(generalController);
+
+
+        this.server.registerRoute(generalRouter.getRouter());
 
         this.server.start();
     }

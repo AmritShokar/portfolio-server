@@ -16,8 +16,6 @@ export class HttpServer implements IHttpServer{
         this.driver.get("/favicon.ico", (req, res) => {
             res.sendFile("favicon.ico", { root: './res' });
         });
-        //Delete this
-        this.driver.use(generalRouter);
     }
 
     start(): void {
@@ -39,7 +37,6 @@ export class HttpServer implements IHttpServer{
     }
 
     registerRoute(route: Express.Router): void {
-        // this.driver.use(generalRouter);
         this.driver.use(route);
         console.log("route added");
     }
