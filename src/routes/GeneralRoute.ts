@@ -1,9 +1,15 @@
 import { Router } from "express"
 
-let router = Router();
+// import GeneralController from "../controllers/GeneralController";
 
-router.get("/time", (req,res) => {
-    return res.status(200);
-});
+export class GeneralRouter {
 
-export = router;
+}
+
+// let router = Router();
+
+// router.get("/time", (req,res) => {
+//     res.status(200).send();
+// });
+
+// export = router;
