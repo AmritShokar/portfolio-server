@@ -14,7 +14,7 @@ export class GeneralController {
     // }
 
     getTime(req: Request, res: Response) {
-        res.status(200).send();
+        res.status(201).send();
     }
 
 }
