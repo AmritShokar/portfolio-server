@@ -9,7 +9,6 @@ export class HttpServer {
     constructor (private readonly driver: Express.Application) {
         console.log("Http Server set");
         this.addRoutes();
-        this.driver.listen()
     }
 
     start(): void {
@@ -31,7 +30,17 @@ export class HttpServer {
     }
 
     addRoutes(): void {
-        this.driver.use(generalRouter);
+        console.log("routes added");
+        // this.driver.use(generalRouter);
+        this.driver.get('/', (req, res) => {
+            res.sendFile("index.html", { root: './res' });
+        });
+        this.driver.get("/favicon.ico", (req, res) => {
+            res.sendFile("favicon.ico", { root: './res' });
+        });
+        this.driver.get('/time', (req, res) => {
+            res.status(200);
+        });
     }
 
 
