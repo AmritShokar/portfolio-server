@@ -13,7 +13,8 @@ export class HttpServer {
 
     start(): void {
         const httpPort = process.env.SERVER_PORT;
-        this.httpServer = Http.createServer(this.driver).listen(httpPort);
+        // this.httpServer = Http.createServer(this.driver).listen(httpPort);
+        this.driver.listen(4444);
         console.log("http server started at http://localhost:" + process.env.SERVER_PORT);
     }
 
@@ -38,8 +39,8 @@ export class HttpServer {
         this.driver.get("/favicon.ico", (req, res) => {
             res.sendFile("favicon.ico", { root: './res' });
         });
-        this.driver.get('/time', (req, res) => {
-            res.status(200);
+        this.driver.get("/time", (req, res) => {
+            res.status(200).send();
         });
     }
 

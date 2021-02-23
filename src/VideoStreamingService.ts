@@ -6,8 +6,9 @@ export class VideoStreamingService {
     public readonly server: HttpServer;
 
     constructor() {
+        this.express = Express();
         console.log("express initialized");
-        this.server = new HttpServer(Express());
+        this.server = new HttpServer(this.express);
     }
 
     start(): void {
