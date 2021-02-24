@@ -1,5 +1,5 @@
 import * as Express from "express";
-import { HttpServer } from "./lib/HttpServer";
+import { HttpServer } from "./lib/httpServer/HttpServer";
 
 import { GeneralController } from "./controllers/GeneralController";
 import { GeneralRouter } from "./routes/GeneralRoute";
