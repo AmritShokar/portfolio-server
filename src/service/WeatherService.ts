@@ -1,8 +1,8 @@
-import * as Http from "http";
+import { HttpClient } from "src/lib/httpClient/HttpClient";
 
 export class WeatherService {
 
-    constructor() {
+    constructor(httpClient: HttpClient) {
         
     }
 
