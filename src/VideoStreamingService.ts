@@ -3,6 +3,7 @@ import { HttpServer } from "./lib/httpServer/HttpServer";
 
 import { GeneralController } from "./controllers/GeneralController";
 import { GeneralRouter } from "./routes/GeneralRoute";
+import { HttpClient } from "./lib/httpClient/HttpClient";
 
 export class VideoStreamingService {
     public readonly express: Express.Application
@@ -34,6 +35,11 @@ export class VideoStreamingService {
         this.server.registerRoute(generalRouter.getRouter());
 
         this.server.start();
+
+
+
+        const client: HttpClient = new HttpClient();
+        client.get("http://api.openweathermap.org/data/2.5/weather?id=5990579&appid=e5cacba430e8393da14ef8b295f3fb3e", {});
     }
 
 }
