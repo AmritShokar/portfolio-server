@@ -20,15 +20,18 @@ export class HttpClient {
     }
 
     async httpRequest(config: AxiosRequestConfig): Promise<any> {
-        console.log("Making weather request 2");
+        return new Promise((resolve, reject) => {
+            console.log("Making weather request 2");
         axios(config)
         .then((response: AxiosResponse) => {
-            console.log(response.data);
-            return response.data
+            // console.log(response.data);
+            resolve(response.data);
         })
         .catch((error: AxiosError) => {
             console.error("Request failed");
             console.error(error);
+            reject("http request error");
+        });
         });
     }
 

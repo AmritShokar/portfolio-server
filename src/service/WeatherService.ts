@@ -11,8 +11,9 @@ export class WeatherService {
             method: "get",
             url: "http://api.openweathermap.org/data/2.5/weather",
             params: {
+                appid: process.env.WEATHER_API_KEY,
                 id: process.env.LOCATION_ID,
-                appid: process.env.WEATHER_API_KEY
+                units: process.env.METRIC_UNIT
             }
         }
     }
@@ -22,6 +23,7 @@ export class WeatherService {
         console.log(process.env.WEATHER_API_KEY);
         console.log(process.env.LOCATION_ID);
         let response = await this.httpClient.httpRequest(this.weatherRequest);
+        console.log("HERE");
         console.log(response);
     }
 
