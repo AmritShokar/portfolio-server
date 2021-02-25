@@ -8,6 +8,7 @@ export class HttpServer implements IHttpServer{
 
     constructor (private readonly driver: Express.Application) {
         console.log("Http Server set");
+        this.driver.use(Express.json());
         this.driver.get('/', (req, res) => {
             res.sendFile("index.html", { root: './res' });
         });

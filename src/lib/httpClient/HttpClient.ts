@@ -1,4 +1,6 @@
+import { rejects } from "assert";
 import axios, { AxiosResponse, AxiosError, AxiosRequestConfig } from "axios";
+import { resolve } from "path";
 
 export class HttpClient {
 
@@ -17,13 +19,14 @@ export class HttpClient {
         });
     }
 
-    httpRequest(config: AxiosRequestConfig) {
+    async httpRequest(config: AxiosRequestConfig): Promise<void> {
+        console.log("Making weather request 2");
         axios(config)
         .then((response) => {
-
+            return response.data;
         })
         .catch((error) => {
-
+            console.error("Request failed");
         });
     }
 
