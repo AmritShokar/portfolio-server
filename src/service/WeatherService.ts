@@ -10,15 +10,17 @@ export class WeatherService {
         this.weatherRequest = {
             method: "get",
             url: "http://api.openweathermap.org/data/2.5/weather",
-            data: {
+            params: {
                 id: process.env.LOCATION_ID,
-                key: process.env.WEATHER_API_KEY
+                appid: process.env.WEATHER_API_KEY
             }
         }
     }
 
     async fetchWeatherData() {
         console.log("Making weather request");
+        console.log(process.env.WEATHER_API_KEY);
+        console.log(process.env.LOCATION_ID);
         let response = await this.httpClient.httpRequest(this.weatherRequest);
         console.log(response);
     }

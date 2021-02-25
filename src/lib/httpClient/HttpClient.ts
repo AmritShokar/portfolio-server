@@ -19,14 +19,16 @@ export class HttpClient {
         });
     }
 
-    async httpRequest(config: AxiosRequestConfig): Promise<void> {
+    async httpRequest(config: AxiosRequestConfig): Promise<any> {
         console.log("Making weather request 2");
         axios(config)
-        .then((response) => {
-            return response.data;
+        .then((response: AxiosResponse) => {
+            console.log(response.data);
+            return response.data
         })
-        .catch((error) => {
+        .catch((error: AxiosError) => {
             console.error("Request failed");
+            console.error(error);
         });
     }
 
