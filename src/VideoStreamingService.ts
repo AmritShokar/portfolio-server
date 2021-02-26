@@ -20,8 +20,10 @@ export class VideoStreamingService {
 
     start(): void {
         // Init and inject Dependencies here for services
+        const client: HttpClient = new HttpClient();
+        const weatherService = new WeatherService(client);
 
-        const generalController = new GeneralController();
+        const generalController = new GeneralController(weatherService);
         const generalRouter = new GeneralRouter(generalController);
 
 
@@ -31,9 +33,7 @@ export class VideoStreamingService {
 
 
 
-        const client: HttpClient = new HttpClient();
-        const weatherService = new WeatherService(client);
-        weatherService.fetchWeatherData();
+        
         // client.get("http://api.openweathermap.org/data/2.5/weather?id=5990579&appid=e5cacba430e8393da14ef8b295f3fb3e", {});
     }
 

@@ -2,19 +2,24 @@ import * as Express from "express";
 import * as Http from "http";
 
 import { IHttpServer } from "./IHttpServer";
+import { Authenticator } from "../auth/Authenticator";
 
 export class HttpServer implements IHttpServer{
     private httpServer: Http.Server;
+    private auth: Authenticator;
 
     constructor (private readonly driver: Express.Application) {
         console.log("Http Server set");
         this.driver.use(Express.json());
-        this.driver.get('/', (req, res) => {
+        this.driver.get("/", (req, res) => {
             res.sendFile("index.html", { root: './res' });
         });
         this.driver.get("/favicon.ico", (req, res) => {
             res.sendFile("favicon.ico", { root: './res' });
         });
+
+        this.auth = new Authenticator();
+        this.registerAuth();
     }
 
     start(): void {
@@ -27,12 +32,14 @@ export class HttpServer implements IHttpServer{
         this.httpServer.close();
     }
 
-    auth(): void {
-        // use this for auth
-        // all requests will go through this path
-        // app.use(function (req, res, next) {
-        //     next()
-        // })
+    registerAuth(): void {
+        this.driver.use("/", (req: Express.Request, res: Express.Response, next: any) => {
+            const bearer = req.headers.authorization ? req.headers.authorization : "";
+            const token = bearer.split(" ")[1];
+            const auth = this.auth.isAuthenticated(token);
+            console.log(`Is Authed: ${auth}`);
+            next()
+        });
     }
 
     registerRoute(route: Express.Router): void {
