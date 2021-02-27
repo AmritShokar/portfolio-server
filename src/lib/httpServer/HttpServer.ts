@@ -27,8 +27,11 @@ export class HttpServer implements IHttpServer{
             const bearer = req.headers.authorization ? req.headers.authorization : "";
             const token = bearer.split(" ")[1];
             const authResult: ValidationResult = this.auth.authenticate(token);
-            console.log(`Is Authed: ${authResult}`);
-            next()
+            if (!authResult.isValid) {
+                res.status(401).send(authResult.errorMessage)
+            } else {
+                next()
+            }
         });
     }
 
