@@ -12,3 +12,4 @@ service.start();
 // Install Morgan later
 // Figure out how Redis works
 // Figure out how io-ts works
+// Figure out Node.js fs module

@@ -2,7 +2,7 @@ import * as Express from "express";
 import * as Http from "http";
 
 import { IHttpServer } from "./IHttpServer";
-import { Authenticator } from "../auth/Authenticator";
+import { Authenticator, ValidationResult } from "../auth/Authenticator";
 
 export class HttpServer implements IHttpServer{
     private httpServer: Http.Server;
@@ -22,22 +22,12 @@ export class HttpServer implements IHttpServer{
         this.registerAuth();
     }
 
-    start(): void {
-        const httpPort = process.env.SERVER_PORT;
-        this.httpServer = Http.createServer(this.driver).listen(httpPort);
-        console.log("http server started at http://localhost:" + process.env.SERVER_PORT);
-    }
-
-    stop(): void {
-        this.httpServer.close();
-    }
-
     registerAuth(): void {
         this.driver.use("/", (req: Express.Request, res: Express.Response, next: any) => {
             const bearer = req.headers.authorization ? req.headers.authorization : "";
             const token = bearer.split(" ")[1];
-            const auth = this.auth.isAuthenticated(token);
-            console.log(`Is Authed: ${auth}`);
+            const authResult: ValidationResult = this.auth.authenticate(token);
+            console.log(`Is Authed: ${authResult}`);
             next()
         });
     }
@@ -47,7 +37,15 @@ export class HttpServer implements IHttpServer{
         console.log("route added");
     }
 
+    start(): void {
+        const httpPort = process.env.SERVER_PORT;
+        this.httpServer = Http.createServer(this.driver).listen(httpPort);
+        console.log("http server started at http://localhost:" + process.env.SERVER_PORT);
+    }
 
+    stop(): void {
+        this.httpServer.close();
+    }
 
 
 

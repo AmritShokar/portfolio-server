@@ -1,5 +1,7 @@
 // import * as JWT from "jsonwebtoken";
 
+import { ValidationResult } from "./Authenticator";
+
 export interface IAuthenticator {
-    isAuthenticated(token: string): boolean
+    authenticate(token: string): ValidationResult;
 }
