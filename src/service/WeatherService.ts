@@ -18,13 +18,9 @@ export class WeatherService {
         }
     }
 
-    async fetchWeatherData() {
-        console.log("Making weather request");
-        console.log(process.env.WEATHER_API_KEY);
-        console.log(process.env.LOCATION_ID);
+    async fetchWeatherData(): Promise<void> {
         let response = await this.httpClient.httpRequest(this.weatherRequest);
-        console.log("HERE");
-        console.log(response);
+        return response;
     }
 
     
