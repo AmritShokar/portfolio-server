@@ -21,19 +21,6 @@ export class HttpServer implements IHttpServer{
         console.log("Http server initialized");
     }
 
-    registerAuth(): void {
-        this.driver.use("/", (req: Express.Request, res: Express.Response, next: any) => {
-            const bearer = req.headers.authorization ? req.headers.authorization : "";
-            const token = bearer.split(" ")[1];
-            const authResult: ValidationResult = this.auth.authenticate(token);
-            if (!authResult.isValid) {
-                res.status(401).send(authResult.errorMessage)
-            } else {
-                next()
-            }
-        });
-    }
-
     registerHandler(path: string, handler: Express.Handler): void {
         this.driver.use(path, handler);
         console.log("handler added");
