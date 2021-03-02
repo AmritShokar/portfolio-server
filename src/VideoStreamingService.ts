@@ -12,9 +12,8 @@ export class VideoStreamingService {
     public readonly server: IHttpServer;
 
     constructor() {
-        this.express = Express();
         console.log("express initialized");
-        this.server = new HttpServer(this.express);
+        this.server = new HttpServer(Express());
 
     }
 

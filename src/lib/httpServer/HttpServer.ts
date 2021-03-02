@@ -9,7 +9,6 @@ export class HttpServer implements IHttpServer{
     private auth: Authenticator;
 
     constructor (private readonly driver: Express.Application) {
-        console.log("Http Server set");
         this.driver.use(Express.json());
         this.driver.get("/", (req, res) => {
             res.sendFile("index.html", { root: './res' });
@@ -20,6 +19,7 @@ export class HttpServer implements IHttpServer{
 
         this.auth = new Authenticator();
         this.registerAuth();
+        console.log("Http server initialized");
     }
 
     registerAuth(): void {
@@ -37,7 +37,7 @@ export class HttpServer implements IHttpServer{
 
     registerRoute(route: Express.Router): void {
         this.driver.use(route);
-        console.log("route added");
+        console.log("routes added");
     }
 
     start(): void {

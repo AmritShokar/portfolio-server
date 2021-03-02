@@ -1,4 +1,5 @@
 import { Router } from "express"
+
 import { GeneralController } from "src/controllers/GeneralController";
 
 export class GeneralRouter {

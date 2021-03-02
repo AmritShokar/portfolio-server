@@ -1,6 +1,4 @@
-import { rejects } from "assert";
 import axios, { AxiosResponse, AxiosError, AxiosRequestConfig } from "axios";
-import { resolve } from "path";
 
 export interface ClientResponse {
     statusCode: number;
@@ -10,9 +8,7 @@ export interface ClientResponse {
 
 export class HttpClient {
 
-    constructor() {
-
-    }
+    constructor() { }
 
     // use promise to return request data
     get(url: string, options: {}): void {
