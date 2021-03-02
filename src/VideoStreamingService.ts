@@ -19,7 +19,6 @@ export class VideoStreamingService {
     }
 
     start(): void {
-        // Init and inject Dependencies here for services
         const client: HttpClient = new HttpClient();
         const weatherService = new WeatherService(client);
 
@@ -29,8 +28,6 @@ export class VideoStreamingService {
         this.server.registerRoute(generalRouter.getRouter());
 
         this.server.start();
-        
-        // client.get("http://api.openweathermap.org/data/2.5/weather?id=5990579&appid=e5cacba430e8393da14ef8b295f3fb3e", {});
     }
 
 }
