@@ -17,8 +17,7 @@ export class HttpServer implements IHttpServer{
             res.sendFile("favicon.ico", { root: './res' });
         });
 
-        this.auth = new Authenticator();
-        this.registerAuth();
+        this.auth = new Authenticator(this);
         console.log("Http server initialized");
     }
 
@@ -35,9 +34,14 @@ export class HttpServer implements IHttpServer{
         });
     }
 
+    registerHandler(path: string, handler: Express.Handler): void {
+        this.driver.use(path, handler);
+        console.log("handler added");
+    }
+
     registerRoute(route: Express.Router): void {
         this.driver.use(route);
-        console.log("routes added");
+        console.log("route added");
     }
 
     start(): void {

@@ -1,10 +1,25 @@
 import * as jwt from "jsonwebtoken";
+import { Handler, Request, Response } from "express";
 
 import { IAuthenticator } from "./IAuthenticator";
+import { IHttpServer } from "../httpServer/IHttpServer";
 
 export class Authenticator implements IAuthenticator{
 
-    constructor() { }
+    constructor(httpServer: IHttpServer) {
+        const path: string = "/";
+        const authHandler: Handler = (req: Request, res: Response, next: any) => {
+            const bearer = req.headers.authorization ? req.headers.authorization : "";
+            const token = bearer.split(" ")[1];
+            const authResult: ValidationResult = this.authenticate(token);
+            if (!authResult.isValid) {
+                res.status(401).send(authResult.errorMessage)
+            } else {
+                next()
+            }
+        }
+        httpServer.registerHandler(path, authHandler);
+     }
 
     authenticate(token: string): ValidationResult {
         const secret = process.env.SECRET;
