@@ -26,13 +26,9 @@ export class VideoStreamingService {
         const generalController = new GeneralController(weatherService);
         const generalRouter = new GeneralRouter(generalController);
 
-
         this.server.registerRoute(generalRouter.getRouter());
 
         this.server.start();
-
-
-
         
         // client.get("http://api.openweathermap.org/data/2.5/weather?id=5990579&appid=e5cacba430e8393da14ef8b295f3fb3e", {});
     }
