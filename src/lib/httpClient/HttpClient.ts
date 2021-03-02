@@ -2,6 +2,12 @@ import { rejects } from "assert";
 import axios, { AxiosResponse, AxiosError, AxiosRequestConfig } from "axios";
 import { resolve } from "path";
 
+export interface ClientResponse {
+    statusCode: number;
+    data: any;
+    error?: string;
+}
+
 export class HttpClient {
 
     constructor() {
@@ -19,25 +25,15 @@ export class HttpClient {
         });
     }
 
-    async httpRequest(config: AxiosRequestConfig): Promise<any> {
+    async httpRequest(config: AxiosRequestConfig): Promise<AxiosResponse> {
         return new Promise((resolve, reject) => {
-            console.log("Making weather request 2");
-        axios(config)
-        .then((response: AxiosResponse) => {
-            // console.log(response.data);
-            resolve(response.data);
-        })
-        .catch((error: AxiosError) => {
-            console.error("Request failed");
-            console.error(error);
-            reject("http request error");
-        });
+            axios(config)
+            .then((response: AxiosResponse) => {
+                resolve(response);
+            })
+            .catch((error: AxiosError) => {
+                reject();
+            });
         });
     }
-
-
-
-
-
-
 }

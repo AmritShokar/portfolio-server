@@ -1,5 +1,9 @@
-import { HttpClient } from "src/lib/httpClient/HttpClient";
-import { AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
+import { getOrElse, isLeft, isRight } from "fp-ts/lib/Either";
+import { failure } from "io-ts/lib/PathReporter";
+
+import { ClientResponse, HttpClient } from "src/lib/httpClient/HttpClient";
+import { Weather, WeatherCodec } from "../lib/models/Weather";
 
 export class WeatherService {
     weatherRequest: AxiosRequestConfig;
@@ -18,9 +22,30 @@ export class WeatherService {
         }
     }
 
-    async fetchWeatherData(): Promise<void> {
-        let response = await this.httpClient.httpRequest(this.weatherRequest);
-        return response;
+    async fetchWeatherData(): Promise<ClientResponse> {
+        try {
+            const response = await this.httpClient.httpRequest(this.weatherRequest);
+            const weatherData = WeatherCodec.decode(response.data.main);
+
+            if (isLeft(weatherData)) {
+                return {
+                    statusCode: 500,
+                    data: "",
+                    error: "missing weather data"
+                }
+            }
+
+            return {
+                statusCode: 200,
+                data: weatherData.right
+            };
+        } catch(error) {
+            return {
+                statusCode: 500,
+                data: "",
+                error: "request failed internally"
+            }
+        }
     }
 
     
