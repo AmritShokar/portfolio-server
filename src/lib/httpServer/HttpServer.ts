@@ -10,10 +10,10 @@ export class HttpServer implements IHttpServer{
 
     constructor (private readonly driver: Express.Application) {
         this.driver.use(Express.json());
-        this.driver.get("/", (req, res) => {
+        this.driver.use("/", (req, res) => {
             res.sendFile("index.html", { root: './res' });
         });
-        this.driver.get("/favicon.ico", (req, res) => {
+        this.driver.use("/favicon.ico", (req, res) => {
             res.sendFile("favicon.ico", { root: './res' });
         });
 
@@ -21,14 +21,19 @@ export class HttpServer implements IHttpServer{
         console.log("Http server initialized");
     }
 
-    registerHandler(path: string, handler: Express.Handler): void {
+    registerHandler(path: string, handler: Express.Handler): number {
         this.driver.use(path, handler);
         console.log("handler added");
+
+        return this.driver.use.length;
     }
 
-    registerRoute(route: Express.Router): void {
-        this.driver.use(route);
+    registerRoute(router: Express.Router): number {
+        this.driver.use(router);
         console.log("route added");
+        
+        const routerData: Express.Router = this.driver._router;
+        return routerData.length;
     }
 
     start(): void {
