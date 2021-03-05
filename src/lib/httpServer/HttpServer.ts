@@ -6,18 +6,19 @@ import { Authenticator, ValidationResult } from "../auth/Authenticator";
 
 export class HttpServer implements IHttpServer{
     private httpServer: Http.Server;
-    private auth: Authenticator;
+    // private auth: Authenticator;
 
     constructor (private readonly driver: Express.Application) {
         this.driver.use(Express.json());
-        this.driver.use("/", (req, res) => {
+        // move these get functions to general router
+        this.driver.get("/", (req, res) => {
             res.sendFile("index.html", { root: './res' });
         });
-        this.driver.use("/favicon.ico", (req, res) => {
+        this.driver.get("/favicon.ico", (req, res) => {
             res.sendFile("favicon.ico", { root: './res' });
         });
 
-        this.auth = new Authenticator(this);
+        // this.auth = new Authenticator(this);
         console.log("Http server initialized");
     }
 

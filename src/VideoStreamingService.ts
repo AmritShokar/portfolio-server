@@ -6,6 +6,7 @@ import { GeneralController } from "./controllers/GeneralController";
 import { GeneralRouter } from "./routes/GeneralRoute";
 import { HttpClient } from "./lib/httpClient/HttpClient";
 import { WeatherService } from "./service/WeatherService";
+import { Authenticator } from "./lib/auth/Authenticator";
 
 export class VideoStreamingService {
     public readonly express: Express.Application
@@ -18,6 +19,8 @@ export class VideoStreamingService {
     }
 
     start(): void {
+        const authenticator: Authenticator = new Authenticator(this.server);
+
         const client: HttpClient = new HttpClient();
         const weatherService = new WeatherService(client);
 
