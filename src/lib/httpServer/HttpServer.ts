@@ -17,7 +17,7 @@ export class HttpServer implements IHttpServer{
         this.driver.use(path, handler);
         console.log("handler added");
 
-        return this.driver.use.length;
+        return this.driver._router.length;
     }
 
     registerRoute(router: Express.Router): number {

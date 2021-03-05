@@ -2,7 +2,6 @@ import { Http2ServerRequest } from "http2";
 import * as Express from "express";
 
 import { HttpServer } from "../../../src/lib/httpServer/HttpServer";
-import { assert } from "node:console";
 
 
 describe("HttpServer", () => {
@@ -21,7 +20,9 @@ it("returns the total number of handler functions", () => {
         res.status(200).send();
     });
 
-    expect(numberOfHandlers).toEqual(1);
+    console.log(numberOfHandlers);
+
+    expect(numberOfHandlers).toEqual(2);
 });
 
 });
