@@ -11,6 +11,14 @@ export class GeneralController {
         this.weatherService = weatherService;
     }
 
+    getRoot(req: Request, res: Response) {
+        res.sendFile("index.html", { root: './res' });
+    }
+
+    getFavIcon(req: Request, res: Response) {
+        res.sendFile("favicon.ico", { root: './res' });
+    }
+
     getTime(req: Request, res: Response) {
         let time = new Date().toDateString();
 

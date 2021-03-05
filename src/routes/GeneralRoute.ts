@@ -13,6 +13,8 @@ export class GeneralRouter {
     }
     
     private addRoutes() {
+        this.router.get("/", this.controller.getRoot);
+        this.router.get("/favicon.ico", this.controller.getFavIcon);
         this.router.get("/time", this.controller.getTime);
         this.router.get("/weather", this.controller.getWeather.bind(this.controller));
     }

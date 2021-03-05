@@ -10,15 +10,6 @@ export class HttpServer implements IHttpServer{
 
     constructor (private readonly driver: Express.Application) {
         this.driver.use(Express.json());
-        // move these get functions to general router
-        this.driver.get("/", (req, res) => {
-            res.sendFile("index.html", { root: './res' });
-        });
-        this.driver.get("/favicon.ico", (req, res) => {
-            res.sendFile("favicon.ico", { root: './res' });
-        });
-
-        // this.auth = new Authenticator(this);
         console.log("Http server initialized");
     }
 
