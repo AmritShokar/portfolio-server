@@ -32,5 +32,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "jest": {
+    "testMatch": [
+      "**/test/**/?(*.)+(spec|test).[jt]s?(x)"
+    ]
+  }
 }

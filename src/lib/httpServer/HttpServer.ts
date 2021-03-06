@@ -9,7 +9,7 @@ export class HttpServer implements IHttpServer{
     // private auth: Authenticator;
 
     constructor (private readonly driver: Express.Application) {
-        this.driver.use(Express.json());
+        //this.driver.use(Express.json());
         console.log("Http server initialized");
     }
 
@@ -17,15 +17,14 @@ export class HttpServer implements IHttpServer{
         this.driver.use(path, handler);
         console.log("handler added");
 
-        return this.driver._router.length;
+        return this.driver._router.stack.length;
     }
 
     registerRoute(router: Express.Router): number {
         this.driver.use(router);
         console.log("route added");
         
-        const routerData: Express.Router = this.driver._router;
-        return routerData.length;
+        return router.length;
     }
 
     start(): void {
