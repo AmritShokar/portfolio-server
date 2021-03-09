@@ -1,7 +1,7 @@
-import { Request, Response} from "express";
+import { Request, Response } from "express";
 
-import { ClientResponse } from "src/lib/httpClient/HttpClient";
-import { WeatherService } from "src/service/WeatherService";
+import { ClientResponse } from "../lib/httpClient/HttpClient";
+import { WeatherService } from "../service/WeatherService";
 
 export class GeneralController {
 // Import and use body-parser here

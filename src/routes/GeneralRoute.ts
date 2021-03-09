@@ -1,6 +1,6 @@
 import { Router } from "express"
 
-import { GeneralController } from "src/controllers/GeneralController";
+import { GeneralController } from "../controllers/GeneralController";
 
 export class GeneralRouter {
     controller: GeneralController;

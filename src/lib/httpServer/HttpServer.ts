@@ -1,4 +1,4 @@
-import * as Express from "express";
+import { Application, Handler, Router } from "express";
 import * as Http from "http";
 
 import { IHttpServer } from "./IHttpServer";
@@ -8,19 +8,19 @@ export class HttpServer implements IHttpServer{
     private httpServer: Http.Server;
     // private auth: Authenticator;
 
-    constructor (private readonly driver: Express.Application) {
+    constructor (private readonly driver: Application) {
         //this.driver.use(Express.json());
         console.log("Http server initialized");
     }
 
-    registerHandler(path: string, handler: Express.Handler): number {
+    registerHandler(path: string, handler: Handler): number {
         this.driver.use(path, handler);
         console.log("handler added");
 
         return this.driver._router.stack.length;
     }
 
-    registerRoute(router: Express.Router): number {
+    registerRoute(router: Router): number {
         this.driver.use(router);
         console.log("route added");
         
@@ -34,7 +34,9 @@ export class HttpServer implements IHttpServer{
     }
 
     stop(): void {
-        this.httpServer.close();
+        if (this.httpServer != null) {
+            this.httpServer.close();
+        }
     }
 
 

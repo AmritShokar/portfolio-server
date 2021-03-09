@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
 import { getOrElse, isLeft, isRight } from "fp-ts/lib/Either";
 import { failure } from "io-ts/lib/PathReporter";
 
-import { ClientResponse, HttpClient } from "src/lib/httpClient/HttpClient";
+import { ClientResponse, HttpClient } from "../lib/httpClient/HttpClient";
 import { Weather, WeatherCodec } from "../lib/models/Weather";
 
 export class WeatherService {

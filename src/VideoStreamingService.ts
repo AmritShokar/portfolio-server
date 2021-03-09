@@ -1,4 +1,4 @@
-import * as Express from "express";
+import express from "express";
 import { HttpServer } from "./lib/httpServer/HttpServer";
 import { IHttpServer } from "./lib/httpServer/IHttpServer";
 
@@ -9,12 +9,12 @@ import { WeatherService } from "./service/WeatherService";
 import { Authenticator } from "./lib/auth/Authenticator";
 
 export class VideoStreamingService {
-    public readonly express: Express.Application
     public readonly server: IHttpServer;
 
     constructor() {
         console.log("express initialized");
-        this.server = new HttpServer(Express());
+        const expresss = express();
+        this.server = new HttpServer(expresss);
 
     }
 
@@ -30,5 +30,9 @@ export class VideoStreamingService {
         this.server.registerRoute(generalRouter.getRouter());
 
         this.server.start();
+    }
+
+    stop(): void {
+        this.server.stop();
     }
 }
