@@ -9,4 +9,29 @@ export const WeatherCodec = t.type({
     humidity: t.number
 });
 
-export type Weather = t.TypeOf<typeof WeatherCodec>;
+export type TypeWeather = t.TypeOf<typeof WeatherCodec>;
+
+export class Weather implements TypeWeather {
+    public temp: number;
+    public feels_like: number;
+    public temp_min: number;
+    public temp_max: number;
+    public pressure: number;
+    public humidity: number;
+
+    constructor(
+        temp: number,
+        feels_like: number,
+        temp_min: number,
+        temp_max: number,
+        pressure: number,
+        humidity: number
+    ) {
+        this.temp = temp;
+        this.feels_like = feels_like;
+        this.temp_min = temp_min;
+        this.temp_max = temp_max;
+        this.pressure = pressure;
+        this.humidity = humidity;
+    }
+}

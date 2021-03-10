@@ -13,8 +13,8 @@ export class VideoStreamingService {
 
     constructor() {
         console.log("express initialized");
-        const expresss = express();
-        this.server = new HttpServer(expresss);
+        const driver = express();
+        this.server = new HttpServer(driver);
 
     }
 
