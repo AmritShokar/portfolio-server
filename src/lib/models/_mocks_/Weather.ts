@@ -1,4 +1,4 @@
-import { Weather } from "../../lib/models/Weather";
+import { Weather } from "../Weather";
 
 const weatherData = new Weather(1,2,3,4,5,6);
 

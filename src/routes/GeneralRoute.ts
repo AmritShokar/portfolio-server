@@ -3,6 +3,7 @@ import { Router } from "express"
 import { GeneralController } from "../controllers/GeneralController";
 
 export class GeneralRouter {
+    path = "/general";
     controller: GeneralController;
     router: Router;
 
@@ -13,10 +14,10 @@ export class GeneralRouter {
     }
     
     private addRoutes() {
-        this.router.get("/", this.controller.getRoot);
-        this.router.get("/favicon.ico", this.controller.getFavIcon);
-        this.router.get("/time", this.controller.getTime);
-        this.router.get("/weather", this.controller.getWeather.bind(this.controller));
+        this.router.get(this.path + "/", this.controller.getRoot);
+        this.router.get(this.path + "/favicon.ico", this.controller.getFavIcon);
+        this.router.get(this.path + "/time", this.controller.getTime);
+        this.router.get(this.path + "/weather", this.controller.getWeather.bind(this.controller));
     }
 
     getRouter(): Router {

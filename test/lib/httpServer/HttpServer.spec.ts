@@ -1,6 +1,8 @@
 import express, { Application, Router } from "express";
+import { Server } from "http";
 
 import { HttpServer } from "../../../src/lib/httpServer/HttpServer";
+import { ServerStatus } from "../../../src/lib/httpServer/IHttpServer";
 
 describe("HttpServer", () => {
     let driver: Application;
@@ -25,7 +27,7 @@ describe("HttpServer", () => {
             res.status(200).send();
         });
 
-        console.log(numberOfHandlers);
+        // console.log(numberOfHandlers);
 
         expect(numberOfHandlers).toEqual(6); // Express contains 2 routes by default
     });
@@ -46,6 +48,18 @@ describe("HttpServer", () => {
         let numberOfRoutes = httpServer.registerRoute(router);
 
         expect(numberOfRoutes).toEqual(3);
+    });
+
+    it("starts the server", () => {
+        httpServer.start();
+
+        expect(httpServer.getServerStatus()).toBe(ServerStatus.RUNNING);
+    });
+
+    it("stops the server", () => {
+        httpServer.stop();
+
+        expect(httpServer.getServerStatus()).toBe(ServerStatus.STOPPED);
     });
 
 });

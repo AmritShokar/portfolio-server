@@ -1,25 +1,19 @@
-import { ClientResponse } from "../../lib/httpClient/HttpClient";
-import weatherData from "./Data.WeatherService";
+import { ClientResponse, HttpClient } from "../../lib/httpClient/HttpClient";
+import { IWeatherService } from "../IWeatherService";
 
-class WeatherService {
+export class WeatherService implements IWeatherService {
+    httpClient: HttpClient;
 
-    constructor() {}
+    constructor(httpClient: HttpClient) {
+        this.httpClient = httpClient;
+    }
     
     async fetchWeatherData(): Promise<ClientResponse> {
         return new Promise((resolve, reject) => {
-            console.log(weatherData);
-
-            let response = {
-                statusCode: 200,
-                data: weatherData
-            }
-
-            resolve(response);
+            resolve({
+                statusCode: 500,
+                data: "Sunny"
+            });
         });
     }
-
 }
-
-const weatherService = new WeatherService();
-
-export default weatherService;

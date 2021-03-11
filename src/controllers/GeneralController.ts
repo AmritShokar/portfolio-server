@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
 
 import { ClientResponse } from "../lib/httpClient/HttpClient";
-import { WeatherService } from "../service/WeatherService";
+import { IWeatherService } from "../service/IWeatherService";
 
 export class GeneralController {
 // Import and use body-parser here
-    weatherService: WeatherService;
+    weatherService: IWeatherService;
 
-    constructor(weatherService: WeatherService) { 
+    constructor(weatherService: IWeatherService) { 
         this.weatherService = weatherService;
     }
 

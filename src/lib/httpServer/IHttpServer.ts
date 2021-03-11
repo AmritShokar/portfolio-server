@@ -6,3 +6,8 @@ export interface IHttpServer {
     start(): void;
     stop(): void;
 }
+
+export enum ServerStatus {
+    RUNNING,
+    STOPPED
+}

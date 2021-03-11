@@ -4,8 +4,9 @@ import { failure } from "io-ts/lib/PathReporter";
 
 import { ClientResponse, HttpClient } from "../lib/httpClient/HttpClient";
 import { Weather, WeatherCodec } from "../lib/models/Weather";
+import { IWeatherService } from "./IWeatherService";
 
-export class WeatherService {
+export class WeatherService implements IWeatherService {
     weatherRequest: AxiosRequestConfig;
     httpClient: HttpClient;
 
@@ -48,5 +49,7 @@ export class WeatherService {
         }
     }
 
-    
+    fetchTestData(): boolean {
+        return false;
+    }    
 }
