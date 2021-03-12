@@ -28,8 +28,9 @@ export class GeneralController {
     async getWeather(req: Request, res: Response) {
         let weatherData: ClientResponse = await this.weatherService.fetchWeatherData();
         let response = weatherData.error ? weatherData.error : weatherData.data;
-
-        res.status(weatherData.statusCode)
+        console.log(weatherData);
+        console.log(response);
+        return res.status(weatherData.statusCode)
            .send(response);
     }
 

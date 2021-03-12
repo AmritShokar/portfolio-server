@@ -1,10 +1,12 @@
-import supertest from "supertest";
+import supertest, { Response } from "supertest";
 import express, { Application } from "express";
 
 import { GeneralRouter } from "../../src/routes/GeneralRoute";
 import { GeneralController } from "../../src/controllers/GeneralController";
 import { ClientResponse, HttpClient } from "../../src/lib/httpClient/HttpClient";
 import { WeatherService } from "../../src/service/_mocks_/WeatherService";
+import weatherData from "../../src/lib/models/_mocks_/Weather";
+import { strict as assert } from "assert";
 
 describe("General Routes for Http Server", () => {
     let driver: Application;
@@ -28,11 +30,23 @@ describe("General Routes for Http Server", () => {
     });
 
     it("returns 200 for valid request", () => {
-        const path = "/general/time"
-        console.log("here");
+        const path = "/general/time";
         return supertest(driver).get(path).expect(200);
+    });
 
-        // expect(true).toBe(true);
+    it("returns a 404 for an invalid route", () => {
+        const path = "/general/invalid";
+        return supertest(driver).get(path).expect(404);
+    });
+
+    it("returns the weather", () => {
+        const path = "/general/weather";
+        let response = {
+            statusCode: 500,
+            data: "sunny"
+        }
+
+        return supertest(driver).get(path).expect(response.data).expect(response.statusCode);
     });
 
 });

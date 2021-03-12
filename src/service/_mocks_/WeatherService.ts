@@ -12,7 +12,7 @@ export class WeatherService implements IWeatherService {
         return new Promise((resolve, reject) => {
             resolve({
                 statusCode: 500,
-                data: "Sunny"
+                data: "sunny"
             });
         });
     }
