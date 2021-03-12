@@ -11,7 +11,8 @@ export class Authenticator implements IAuthenticator{
         const authHandler: Handler = (req: Request, res: Response, next: any) => {
             const bearer = req.headers.authorization ? req.headers.authorization : "";
             const token = bearer.split(" ")[1];
-            const authResult: ValidationResult = this.authenticate(token);
+            const secret = process.env.SECRET ? process.env.SECRET : "";
+            const authResult: ValidationResult = this.authenticate(token, secret);
             if (!authResult.isValid) {
                 res.status(401).send(authResult.errorMessage)
             } else {
@@ -21,28 +22,29 @@ export class Authenticator implements IAuthenticator{
         httpServer.registerHandler(path, authHandler);
      }
 
-    authenticate(token: string): ValidationResult {
-        const secret = process.env.SECRET;
-        if (secret != undefined) {
-            try {
-                jwt.verify(token, secret) as DecodeResult;
-                return { isValid: true, errorMessage: undefined};
-            }
-            catch(error) {
-                return { isValid: false, errorMessage: `Invalid token: ${error.message}`};
-            }
-        }        
+    authenticate(token: string, secret: string): ValidationResult {
+        if (token.length == 0) {
+            return { isValid: false, errorMessage: "no token provided"};
+        }
 
-        return { isValid: false, errorMessage: "No JWT token received"};
+        try {
+            jwt.verify(token, secret) as DecodeResult;
+            return { isValid: true, errorMessage: undefined};
+        }
+        catch(error) {
+            return { isValid: false, errorMessage: `Invalid token: ${error.message}`};
+        }
     }
 
-    generateToken() {
+    generateToken(): string {
         let data = { "name": process.env.TOKEN_DATA_VALUE };
         const secret = process.env.SECRET;
         if (secret != undefined) {
             const token = jwt.sign(data, secret);
             console.log(token);
+            return token;
         }
+        return "error";
     }
 
 }

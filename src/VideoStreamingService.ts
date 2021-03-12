@@ -15,7 +15,6 @@ export class VideoStreamingService {
         console.log("express initialized");
         const driver = express();
         this.server = new HttpServer(driver);
-
     }
 
     start(): void {
