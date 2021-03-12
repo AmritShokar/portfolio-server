@@ -1,16 +1,15 @@
-import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
-import { getOrElse, isLeft, isRight } from "fp-ts/lib/Either";
-import { failure } from "io-ts/lib/PathReporter";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import { isLeft } from "fp-ts/lib/Either";
 
-import { ClientResponse, HttpClient } from "../lib/httpClient/HttpClient";
-import { Weather, WeatherCodec } from "../lib/models/Weather";
+import { ClientResponse, IHttpClient } from "../lib/httpClient/IHttpClient";
+import { WeatherCodec } from "../lib/models/Weather";
 import { IWeatherService } from "./IWeatherService";
 
 export class WeatherService implements IWeatherService {
     weatherRequest: AxiosRequestConfig;
-    httpClient: HttpClient;
+    httpClient: IHttpClient;
 
-    constructor(httpClient: HttpClient) {
+    constructor(httpClient: IHttpClient) {
         this.httpClient = httpClient;
         this.weatherRequest = {
             method: "get",
@@ -25,7 +24,7 @@ export class WeatherService implements IWeatherService {
 
     async fetchWeatherData(): Promise<ClientResponse> {
         try {
-            const response = await this.httpClient.httpRequest(this.weatherRequest);
+            const response: AxiosResponse = await this.httpClient.httpRequest(this.weatherRequest);
             const weatherData = WeatherCodec.decode(response.data.main);
 
             if (isLeft(weatherData)) {
@@ -47,9 +46,5 @@ export class WeatherService implements IWeatherService {
                 error: "request failed internally"
             }
         }
-    }
-
-    fetchTestData(): boolean {
-        return false;
-    }    
+    }  
 }

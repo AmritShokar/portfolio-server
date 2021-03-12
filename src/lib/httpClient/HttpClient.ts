@@ -1,12 +1,7 @@
 import axios, { AxiosResponse, AxiosError, AxiosRequestConfig } from "axios";
+import { IHttpClient } from "./IHttpClient";
 
-export interface ClientResponse {
-    statusCode: number;
-    data: any;
-    error?: string;
-}
-
-export class HttpClient {
+export class HttpClient implements IHttpClient {
 
     constructor() { }
 

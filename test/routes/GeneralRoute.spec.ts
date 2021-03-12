@@ -3,7 +3,7 @@ import express, { Application } from "express";
 
 import { GeneralRouter } from "../../src/routes/GeneralRoute";
 import { GeneralController } from "../../src/controllers/GeneralController";
-import { ClientResponse, HttpClient } from "../../src/lib/httpClient/HttpClient";
+import { ClientResponse, HttpClient } from "../../src/lib/httpClient/IHttpClient";
 import { WeatherService } from "../../src/service/_mocks_/WeatherService";
 import weatherData from "../../src/lib/models/_mocks_/Weather";
 import { strict as assert } from "assert";

@@ -1,4 +1,4 @@
-import { ClientResponse, HttpClient } from "../../lib/httpClient/HttpClient";
+import { ClientResponse, HttpClient } from "../../lib/httpClient/IHttpClient";
 import { IWeatherService } from "../IWeatherService";
 
 export class WeatherService implements IWeatherService {
