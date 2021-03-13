@@ -17,6 +17,7 @@
     "@babel/core": "^7.13.8",
     "@babel/preset-env": "^7.13.9",
     "@babel/preset-typescript": "^7.13.0",
+    "@types/axios": "^0.14.0",
     "@types/express": "^4.17.11",
     "@types/jest": "^26.0.20",
     "@types/jsonwebtoken": "^8.5.0",
@@ -36,7 +37,7 @@
     "build-test": "mkdir -p build && tsc -b test",
     "build": "mkdir -p build && tsc -b src",
     "dev-start": "concurrently --kill-others \"tsc -b src -w\" \"nodemon build/server.js\"",
-    "start": "node build/server.js",
+    "start": "node build/res/server.js",
     "test": "jest"
   },
   "author": "",

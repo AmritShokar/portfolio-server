@@ -1,10 +1,11 @@
-import { ClientResponse, HttpClient } from "../../lib/httpClient/IHttpClient";
+import { IHttpClient } from "../../lib/httpClient/IHttpClient";
+import { ClientResponse } from "../../lib/httpClient/ClientResponse";
 import { IWeatherService } from "../IWeatherService";
 
 export class WeatherService implements IWeatherService {
-    httpClient: HttpClient;
+    httpClient: IHttpClient;
 
-    constructor(httpClient: HttpClient) {
+    constructor(httpClient: IHttpClient) {
         this.httpClient = httpClient;
     }
     

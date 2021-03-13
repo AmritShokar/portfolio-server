@@ -1,4 +1,5 @@
 import axios, { AxiosResponse, AxiosError, AxiosRequestConfig } from "axios";
+import { ClientResponse } from "./ClientResponse";
 import { IHttpClient } from "./IHttpClient";
 
 export class HttpClient implements IHttpClient {
@@ -16,11 +17,14 @@ export class HttpClient implements IHttpClient {
         });
     }
 
-    async httpRequest(config: AxiosRequestConfig): Promise<AxiosResponse> {
+    async httpRequest(config: AxiosRequestConfig): Promise<ClientResponse> {
         return new Promise((resolve, reject) => {
             axios(config)
             .then((response: AxiosResponse) => {
-                resolve(response);
+                resolve({
+                    statusCode: response.status,
+                    data: response.data.main
+                });
             })
             .catch((error: AxiosError) => {
                 reject();

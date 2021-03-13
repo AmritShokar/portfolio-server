@@ -1,11 +1,6 @@
 import { AxiosRequestConfig, AxiosResponse } from "axios";
-
-export interface ClientResponse {
-    statusCode: number;
-    data: any;
-    error?: string;
-}
+import { ClientResponse } from "./ClientResponse";
 
 export interface IHttpClient {
-    httpRequest(config: AxiosRequestConfig): Promise<AxiosResponse>
+    httpRequest(config: AxiosRequestConfig): Promise<ClientResponse>;
 }

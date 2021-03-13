@@ -1,7 +1,8 @@
 import { AxiosRequestConfig, AxiosResponse } from "axios";
 import { isLeft } from "fp-ts/lib/Either";
 
-import { ClientResponse, IHttpClient } from "../lib/httpClient/IHttpClient";
+import { ClientResponse } from "../lib/httpClient/ClientResponse";
+import { IHttpClient } from "../lib/httpClient/IHttpClient";
 import { WeatherCodec } from "../lib/models/Weather";
 import { IWeatherService } from "./IWeatherService";
 
@@ -24,8 +25,8 @@ export class WeatherService implements IWeatherService {
 
     async fetchWeatherData(): Promise<ClientResponse> {
         try {
-            const response: AxiosResponse = await this.httpClient.httpRequest(this.weatherRequest);
-            const weatherData = WeatherCodec.decode(response.data.main);
+            const response: ClientResponse = await this.httpClient.httpRequest(this.weatherRequest);
+            const weatherData = WeatherCodec.decode(response.data);
 
             if (isLeft(weatherData)) {
                 return {
@@ -36,7 +37,7 @@ export class WeatherService implements IWeatherService {
             }
 
             return {
-                statusCode: 200,
+                statusCode: response.statusCode,
                 data: weatherData.right
             };
         } catch(error) {
