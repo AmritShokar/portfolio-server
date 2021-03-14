@@ -13,12 +13,14 @@ export class Authenticator implements IAuthenticator{
             const token = bearer.split(" ")[1];
             const secret = process.env.SECRET ? process.env.SECRET : "";
             const authResult: ValidationResult = this.authenticate(token, secret);
+
             if (!authResult.isValid) {
                 res.status(401).send(authResult.errorMessage)
             } else {
                 next()
             }
         }
+
         httpServer.registerHandler(path, authHandler);
      }
 
@@ -46,7 +48,6 @@ export class Authenticator implements IAuthenticator{
         }
         return "error";
     }
-
 }
 
 export interface ValidationResult {

@@ -23,6 +23,4 @@ export class GeneralRouter {
     getRouter(): Router {
         return this.router;
     }
-
-
 }

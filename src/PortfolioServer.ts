@@ -12,9 +12,9 @@ export class VideoStreamingService {
     public readonly server: IHttpServer;
 
     constructor() {
-        console.log("express initialized");
         const driver = express();
         this.server = new HttpServer(driver);
+        console.log("express initialized");
     }
 
     start(): void {

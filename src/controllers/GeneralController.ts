@@ -4,7 +4,6 @@ import { ClientResponse } from "../lib/httpClient/ClientResponse";
 import { IWeatherService } from "../service/IWeatherService";
 
 export class GeneralController {
-// Import and use body-parser here
     weatherService: IWeatherService;
 
     constructor(weatherService: IWeatherService) { 
@@ -28,10 +27,8 @@ export class GeneralController {
     async getWeather(req: Request, res: Response) {
         let weatherData: ClientResponse = await this.weatherService.fetchWeatherData();
         let response = weatherData.error ? weatherData.error : weatherData.data;
-        console.log(weatherData);
-        console.log(response);
-        return res.status(weatherData.statusCode)
-           .send(response);
+
+        return res.status(weatherData.statusCode).send(response);
     }
 
 }
