@@ -13,11 +13,23 @@ describe("Weather Service", () => {
         weatherService = new WeatherService(httpClient);
     });
 
-    it("returns the weather info", async () => {
-        const weatherData: ClientResponse = await weatherService.fetchWeatherData();
-        expect(weatherData.statusCode).toBe(200)
-        expect(weatherData.data).toEqual(weatherData);
+    it("returns 200 for a valid weather request", async () => {
+        const response: ClientResponse = await weatherService.fetchWeatherData();
+        expect(response.statusCode).toBe(200);
+        expect(response.data).toBe(weatherData);
     });
 
+    it("returns 500 for an invalid model response", async () => {
+        weatherService.weatherRequest.url = "http://invalid.com";
+        const response: ClientResponse = await weatherService.fetchWeatherData();
+        expect(response.statusCode).toBe(500);
+        expect(response.data).not.toBe(weatherData);
+    });
 
+    it("returns 500 for a failed request", async () => {
+        weatherService.weatherRequest.url = "http://request-failed.com";
+        const response: ClientResponse = await weatherService.fetchWeatherData();
+        expect(response.statusCode).toBe(500);
+        expect(response.data).not.toBe(weatherData);
+    });
 });

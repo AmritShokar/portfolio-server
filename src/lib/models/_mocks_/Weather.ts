@@ -1,6 +1,9 @@
 import { Weather } from "../Weather";
 
 const weatherData = new Weather(1,2,3,4,5,6);
+
+export default weatherData;
+
 export const invalidWeatherData = {
     temp: 1,
     feels_like: 2,
@@ -8,5 +11,3 @@ export const invalidWeatherData = {
     pressure: 5,
     humidity: 6
 }
-
-export default weatherData;

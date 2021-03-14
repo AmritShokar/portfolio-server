@@ -8,7 +8,7 @@ import { IWeatherService } from "./IWeatherService";
 
 export class WeatherService implements IWeatherService {
     weatherRequest: AxiosRequestConfig;
-    httpClient: IHttpClient;
+    private httpClient: IHttpClient;
 
     constructor(httpClient: IHttpClient) {
         this.httpClient = httpClient;
@@ -30,6 +30,8 @@ export class WeatherService implements IWeatherService {
 
             if (isLeft(weatherData)) {
                 return {
+                    // returns 500 to show front end client a portfolio server error 
+                    // and not a 403 weather api error
                     statusCode: 500,
                     data: "",
                     error: "missing weather data"

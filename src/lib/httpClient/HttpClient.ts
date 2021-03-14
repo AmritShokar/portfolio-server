@@ -13,7 +13,7 @@ export class HttpClient implements IHttpClient {
             console.log(response.data);
         })
         .catch((error: AxiosError) => {
-            console.log(`YO: ${error}`);
+            console.log(error);
         });
     }
 
