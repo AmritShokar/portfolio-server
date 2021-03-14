@@ -1,4 +1,4 @@
-import { VideoStreamingService } from "../src/VideoStreamingService";
+import { VideoStreamingService } from "../src/PortfolioServer";
 
 describe("video streaming server setup", () => {
     it("starts the rest api server", () => {

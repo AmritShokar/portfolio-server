@@ -1,4 +1,4 @@
-import supertest, { Response } from "supertest";
+import supertest from "supertest";
 import express, { Application } from "express";
 
 import { GeneralRouter } from "../../src/routes/GeneralRoute";
@@ -6,7 +6,6 @@ import { GeneralController } from "../../src/controllers/GeneralController";
 import { HttpClient } from "../../src/lib/httpClient/HttpClient";
 import { ClientResponse } from "../../src/lib/httpClient/ClientResponse";
 import { WeatherService } from "../../src/service/_mocks_/WeatherService";
-import weatherData from "../../src/lib/models/_mocks_/Weather";
 
 describe("General Routes for Http Server", () => {
     let driver: Application;
@@ -31,11 +30,13 @@ describe("General Routes for Http Server", () => {
 
     it("returns 200 for valid request", () => {
         const path = "/general/time";
+
         return supertest(driver).get(path).expect(200);
     });
 
     it("returns a 404 for an invalid route", () => {
         const path = "/general/invalid";
+
         return supertest(driver).get(path).expect(404);
     });
 
@@ -48,5 +49,4 @@ describe("General Routes for Http Server", () => {
 
         return supertest(driver).get(path).expect(response.data).expect(response.statusCode);
     });
-
 });

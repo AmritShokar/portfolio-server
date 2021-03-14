@@ -1,5 +1,4 @@
 import express, { Application, Router } from "express";
-import { Server } from "http";
 
 import { HttpServer } from "../../../src/lib/httpServer/HttpServer";
 import { ServerStatus } from "../../../src/lib/httpServer/IHttpServer";
@@ -26,8 +25,6 @@ describe("HttpServer", () => {
         let numberOfHandlers = httpServer.registerHandler("/test/another2", (req, res) => {
             res.status(200).send();
         });
-
-        // console.log(numberOfHandlers);
 
         expect(numberOfHandlers).toEqual(6); // Express contains 2 routes by default
     });
