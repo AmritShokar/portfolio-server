@@ -27,8 +27,8 @@ export class GeneralController {
     async getWeather(req: Request, res: Response) {
         let weatherData: ClientResponse = await this.weatherService.fetchWeatherData();
         let response = weatherData.error ? weatherData.error : weatherData.data;
-
-        return res.status(weatherData.statusCode).send(response);
+        
+        return res.header("Access-Control-Allow-Origin", "*").status(weatherData.statusCode).send(response);
     }
 
 }
