@@ -1,5 +1,6 @@
 import { Application, Handler, Router } from "express";
 import * as Http from "http";
+import cors from 'cors'
 
 import { IHttpServer, ServerStatus } from "./IHttpServer";
 
@@ -27,6 +28,7 @@ export class HttpServer implements IHttpServer{
     }
 
     start(): void {
+        this.driver.use(cors())
         const httpPort = process.env.SERVER_PORT;
         this.httpServer = Http.createServer(this.driver).listen(httpPort);
         console.log("http server started at http://localhost:" + process.env.SERVER_PORT);
