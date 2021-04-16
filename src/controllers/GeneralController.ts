@@ -28,7 +28,11 @@ export class GeneralController {
         let weatherData: ClientResponse = await this.weatherService.fetchWeatherData();
         let response = weatherData.error ? weatherData.error : weatherData.data;
         
-        return res.header("Access-Control-Allow-Origin", "*").status(weatherData.statusCode).send(response);
+        res.setHeader("Access-Control-Allow-Origin", "*")
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+        res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+        // res.setHeader('Access-Control-Allow-Credentials', true);
+        return res.status(weatherData.statusCode).send(response);
     }
 
 }
