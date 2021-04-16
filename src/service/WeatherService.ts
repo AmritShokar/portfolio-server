@@ -7,7 +7,7 @@ import { WeatherCodec } from "../lib/models/Weather";
 import { IWeatherService } from "./IWeatherService";
 
 export class WeatherService implements IWeatherService {
-    weatherRequest: AxiosRequestConfig;
+    weatherRequest: AxiosRequestConfig; // Create interface for request objects
     private httpClient: IHttpClient;
 
     constructor(httpClient: IHttpClient) {
