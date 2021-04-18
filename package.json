@@ -39,7 +39,7 @@
     "build-test": "mkdir -p build && tsc -b test",
     "build": "mkdir -p build && tsc -b src",
     "dev-start": "concurrently --kill-others \"tsc -b src -w\" \"nodemon build/server.js\"",
-    "start": "node build/res/server.js",
+    "start": "node build/res/Server.js",
     "test": "jest"
   },
   "author": "",
