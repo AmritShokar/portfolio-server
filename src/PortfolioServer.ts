@@ -18,7 +18,7 @@ export class VideoStreamingService {
     }
 
     start(): void {
-        const authenticator: Authenticator = new Authenticator(this.server);
+        // const authenticator: Authenticator = new Authenticator(this.server);
 
         const client: HttpClient = new HttpClient();
         const weatherService = new WeatherService(client);
