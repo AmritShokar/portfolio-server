@@ -15,7 +15,7 @@ export class HttpServer implements IHttpServer{
             origin: '*',
             credentials: true
         }
-        this.driver.options("*", cors(corsOptions))
+        this.driver.use(cors(corsOptions))
     }
 
     registerHandler(path: string, handler: Handler): number {
