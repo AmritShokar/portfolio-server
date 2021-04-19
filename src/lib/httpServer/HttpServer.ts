@@ -11,6 +11,7 @@ export class HttpServer implements IHttpServer{
     constructor (private readonly driver: Application) {
         this.serverStatus = ServerStatus.STOPPED;
         console.log("Http server initialized");
+        this.driver.options("*", cors())
     }
 
     registerHandler(path: string, handler: Handler): number {
@@ -28,7 +29,6 @@ export class HttpServer implements IHttpServer{
     }
 
     start(): void {
-        this.driver.use(cors())
         const httpPort = process.env.SERVER_PORT;
         this.httpServer = Http.createServer(this.driver).listen(httpPort);
         console.log("http server started at http://localhost:" + process.env.SERVER_PORT);
