@@ -25,7 +25,7 @@ export class Authenticator implements IAuthenticator{
      }
 
     authenticate(token: string, secret: string): ValidationResult {
-        if (typeof token == 'undefined' && !token) {
+        if (token === "") {
             return { isValid: false, errorMessage: "no token provided"};
         }
 
