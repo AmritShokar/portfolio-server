@@ -25,8 +25,6 @@ export class Authenticator implements IAuthenticator{
      }
 
     authenticate(token: string, secret: string): ValidationResult {
-        console.log("see this about to be authed")
-        console.log(token)
         if (token === "") {
             return { isValid: false, errorMessage: "no token provided"};
         }
