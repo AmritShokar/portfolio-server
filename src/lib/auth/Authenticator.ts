@@ -34,7 +34,7 @@ export class Authenticator implements IAuthenticator{
             return { isValid: true, errorMessage: undefined};
         }
         catch(error) {
-            return { isValid: false, errorMessage: `Invalid token: ${error.message}`};
+            return { isValid: false, errorMessage: `Invalid tokenz: ${error.message}`};
         }
     }
 
