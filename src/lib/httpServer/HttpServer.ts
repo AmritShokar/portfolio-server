@@ -11,11 +11,7 @@ export class HttpServer implements IHttpServer{
     constructor (private readonly driver: Application) {
         this.serverStatus = ServerStatus.STOPPED;
         console.log("Http server initialized");
-        const corsOptions = {
-            origin: '*',
-            credentials: true
-        }
-        this.driver.use(cors(corsOptions))
+        this.driver.use(cors())
     }
 
     registerHandler(path: string, handler: Handler): number {
