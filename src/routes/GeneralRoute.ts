@@ -1,8 +1,9 @@
 import { Router } from "express"
 
+import { IRoute } from "./IRoute"
 import { GeneralController } from "../controllers/GeneralController";
 
-export class GeneralRouter {
+export class GeneralRouter implements IRoute {
     path = "/general";
     controller: GeneralController;
     router: Router;

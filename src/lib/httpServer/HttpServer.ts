@@ -4,7 +4,7 @@ import cors from 'cors'
 
 import { IHttpServer, ServerStatus } from "./IHttpServer";
 
-export class HttpServer implements IHttpServer{
+export class HttpServer implements IHttpServer {
     private httpServer: Http.Server;
     serverStatus: ServerStatus;
 
