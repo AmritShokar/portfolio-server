@@ -5,7 +5,7 @@ import { IHttpServer } from "./lib/httpServer/IHttpServer";
 import { GeneralController } from "./controllers/GeneralController";
 import { GeneralRouter } from "./routes/GeneralRoute";
 import { HttpClient } from "./lib/httpClient/HttpClient";
-import { WeatherService } from "./service/WeatherService";
+import { WeatherService } from "./service/weatherService/WeatherService";
 import { Authenticator } from "./lib/auth/Authenticator";
 
 export class VideoStreamingService {
