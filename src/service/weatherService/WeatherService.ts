@@ -1,9 +1,9 @@
 import { AxiosRequestConfig, AxiosResponse } from "axios";
 import { isLeft } from "fp-ts/lib/Either";
 
-import { ClientResponse } from "../lib/httpClient/ClientResponse";
-import { IHttpClient } from "../lib/httpClient/IHttpClient";
-import { WeatherCodec } from "../lib/models/Weather";
+import { ClientResponse } from "../../lib/httpClient/ClientResponse";
+import { IHttpClient } from "../../lib/httpClient/IHttpClient";
+import { WeatherCodec } from "../../lib/models/Weather";
 import { IWeatherService } from "./IWeatherService";
 
 export class WeatherService implements IWeatherService {

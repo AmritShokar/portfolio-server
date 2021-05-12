@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
 import { ClientResponse } from "../lib/httpClient/ClientResponse";
-import { IWeatherService } from "../service/IWeatherService";
+import { IWeatherService } from "../service/weatherService/IWeatherService";
 
 export class GeneralController {
     weatherService: IWeatherService;

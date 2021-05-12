@@ -1,6 +1,6 @@
 import { IHttpClient } from "../../lib/httpClient/IHttpClient";
 import { ClientResponse } from "../../lib/httpClient/ClientResponse";
-import { IWeatherService } from "../IWeatherService";
+import { IWeatherService } from "../weatherService/IWeatherService";
 
 export class WeatherService implements IWeatherService {
     httpClient: IHttpClient;
