@@ -4,6 +4,7 @@
   "description": "Microservice for providing portfolio data",
   "main": "index.js",
   "dependencies": {
+    "aws-sdk": "^2.906.0",
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",

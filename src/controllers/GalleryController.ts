@@ -12,7 +12,8 @@ export class GalleryController {
 
         console.log(req.file)
 
-        
+        // use gallery service to upload image
+        // use async/await here
 
         return res.status(200).send()
     }
