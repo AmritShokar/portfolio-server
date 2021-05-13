@@ -2,3 +2,4 @@ node_modules
 build
 .env
 Nginx-default-config-file.txt
+uploads

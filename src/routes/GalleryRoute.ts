@@ -1,22 +1,27 @@
-import { Router } from "express"
+import { Router } from "express";
 
-import { IRoute } from "./IRoute"
-// import Gallery Controller here
+import { IRoute } from "./IRoute";
+import { GalleryController } from "../controllers/GalleryController";
 
-export class GalleryRoute implements IRoute {
+import multer from "multer";
+const upload = multer({ dest: 'uploads/' })
+
+export class GalleryRouter implements IRoute {
     path = "/gallery";
-    // controller: GalleryController;
+    controller: GalleryController;
     router: Router;
 
-    constructor(/*controller: GalleryController*/) {
-
+    constructor(controller: GalleryController) {
+        this.router = Router()
+        this.controller = controller;
+        this.addRoutes();
     }
 
     private addRoutes() {
-        
+        this.router.post(this.path + "/image", upload.single('image'), this.controller.postImage);
     }
 
     getRouter(): Router {
-        return this.router
+        return this.router;
     }
 }
