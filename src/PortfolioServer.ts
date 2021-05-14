@@ -9,6 +9,8 @@ import { WeatherService } from "./service/weatherService/WeatherService";
 import { Authenticator } from "./lib/auth/Authenticator";
 import { GalleryController } from "./controllers/GalleryController";
 import { GalleryRouter } from "./routes/GalleryRoute";
+import { GalleryService } from "./service/galleryService/GalleryService"
+import { AwsS3Client } from "./lib/awsS3Client/AwsS3Client";
 
 export class VideoStreamingService {
     public readonly server: IHttpServer;
@@ -23,12 +25,14 @@ export class VideoStreamingService {
         const authenticator: Authenticator = new Authenticator(this.server);
 
         const client: HttpClient = new HttpClient();
+        const s3Client: AwsS3Client = new AwsS3Client();
         const weatherService = new WeatherService(client);
+        const galleryService = new GalleryService(s3Client);
 
         const generalController = new GeneralController(weatherService);
         const generalRouter = new GeneralRouter(generalController);
 
-        const galleryController = new GalleryController();
+        const galleryController = new GalleryController(galleryService);
         const galleryRouter = new GalleryRouter(galleryController);
 
         this.server.registerRoute(generalRouter.getRouter());

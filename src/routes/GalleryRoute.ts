@@ -18,7 +18,11 @@ export class GalleryRouter implements IRoute {
     }
 
     private addRoutes() {
-        this.router.post(this.path + "/image", upload.single('image'), this.controller.postImage);
+        this.router.post(
+            this.path + "/image", 
+            upload.single('image'), 
+            this.controller.postImage.bind(this.controller)
+        );
     }
 
     getRouter(): Router {
