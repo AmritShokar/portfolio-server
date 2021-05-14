@@ -34,7 +34,7 @@ export class WeatherService implements IWeatherService {
                     // and not a 403 weather api error
                     statusCode: 500,
                     data: "",
-                    error: "missing weather data"
+                    error: new Error("missing weather data")
                 }
             }
 
@@ -42,11 +42,11 @@ export class WeatherService implements IWeatherService {
                 statusCode: response.statusCode,
                 data: weatherData.right
             };
-        } catch(error) {
+        } catch {
             return {
                 statusCode: 500,
                 data: "",
-                error: "request failed internally"
+                error: new Error("request failed internally")
             }
         }
     }  

@@ -1,5 +1,8 @@
 import aws, { S3 } from "aws-sdk"
 import fs from "fs"
+
+import { ClientResponse } from "../httpClient/ClientResponse";
+
 // Config AWS credentials
 aws.config.update({ region: "us-east-1" });
 const AWS_ACCESS_KEY_ID = process.env.AWS_ACCESS_KEY_ID
@@ -18,7 +21,7 @@ export class AwsS3Client {
         this.s3 = new aws.S3();
     }
 
-    async uploadFile(uploadParams: UploadParams): Promise<Boolean> {
+    async uploadFile(uploadParams: UploadParams): Promise<ClientResponse> {
         return new Promise( (resolve, reject) => {
             const params: S3.PutObjectRequest = {
                 Bucket: uploadParams.bucket,
@@ -28,12 +31,15 @@ export class AwsS3Client {
 
             this.s3.upload(params, (error, data) => {
                 if (error) {
-                    console.log("aws s3 client upload error: ", error);
+                    console.error("aws s3 client upload error: ", error);
                     reject();
                 } else {
-                    console.log("aws file upload success");
+                    console.log("aws file upload succeeded");
                     console.log(data);
-                    resolve(true);
+                    resolve({
+                        statusCode: 201,
+                        data: data.Location
+                    });
                 }
             });
         });

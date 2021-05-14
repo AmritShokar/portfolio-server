@@ -28,6 +28,7 @@ export class HttpClient implements IHttpClient {
                 });
             })
             .catch((error: AxiosError) => {
+                console.error("http client error: ", error.message);
                 reject();
             });
         });

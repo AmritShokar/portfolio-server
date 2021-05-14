@@ -2,6 +2,7 @@ import { AwsS3Client, UploadParams } from "../../lib/awsS3Client/AwsS3Client";
 import fs from "fs";
 
 import { IGalleryService } from "./IGalleryService";
+import { ClientResponse } from "../../lib/httpClient/ClientResponse";
 
 export class GalleryService implements IGalleryService {
     s3Client: AwsS3Client;
@@ -10,13 +11,17 @@ export class GalleryService implements IGalleryService {
         this.s3Client = s3Client
     }
 
-    async uploadImage(image: Express.Multer.File): Promise<Boolean> {
-        let filestream = fs.createReadStream(image.path)
+    async uploadImage(image: Express.Multer.File): Promise<ClientResponse> {
+        let filestream = fs.createReadStream(image.path);
 
         filestream.on("error", (error) => {
             console.log("image file stream error: ", error);
+            return {
+                statusCode: 500,
+                data: "",
+                error: new Error("error occured while uploading image")
+            };
         });
-        
 
         const uploadParams: UploadParams = {
             bucket: "gallery-bucket-amritpalshokar.com",
@@ -25,9 +30,13 @@ export class GalleryService implements IGalleryService {
         }
 
         try {
-            return this.s3Client.uploadFile(uploadParams);
+            return await this.s3Client.uploadFile(uploadParams);
         } catch {
-            return false;
+            return {
+                statusCode: 500,
+                data: "",
+                error: new Error("error occured while uploading image")
+            };
         }
     }
 

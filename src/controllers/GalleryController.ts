@@ -1,27 +1,21 @@
 import { Request, Response } from "express";
 
-import { GalleryService } from "../service/galleryService/GalleryService"
+import { GalleryService } from "../service/galleryService/GalleryService";
+import { ClientResponse } from "../lib/httpClient/ClientResponse";
 
 export class GalleryController {
     galleryService: GalleryService;
 
-    // TODO: inject gallery service here
     constructor(galleryService: GalleryService) {
         this.galleryService = galleryService;
     }
 
     async postImage(req: Request, res: Response) {
-        console.log("received image")
+        // TODO: remove console log after testing
+        console.log(req.file);
 
-        console.log(req.file)
+        const response: ClientResponse = await this.galleryService.uploadImage(req.file);
 
-        // use gallery service to upload image
-        // use async/await here
-
-        const isUploaded = await this.galleryService.uploadImage(req.file);
-
-        console.log("file uploaded succeeded: ", isUploaded);
-
-        return res.status(200).send()
+        return res.status(response.statusCode).send(response.error ? response.error.message : undefined);
     }
 }
