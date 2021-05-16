@@ -4,7 +4,7 @@ import { IRoute } from "./IRoute"
 import { GeneralController } from "../controllers/GeneralController";
 
 export class GeneralRouter implements IRoute {
-    path = "/general";
+    path = process.env.API_VERSION+"/general";
     controller: GeneralController;
     router: Router;
 

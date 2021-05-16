@@ -7,7 +7,7 @@ import multer from "multer";
 const upload = multer({ dest: 'uploads/' })
 
 export class GalleryRouter implements IRoute {
-    path = "/gallery";
+    path = process.env.API_VERSION+"/gallery";
     controller: GalleryController;
     router: Router;
 
