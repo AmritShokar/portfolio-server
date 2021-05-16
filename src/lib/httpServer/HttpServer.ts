@@ -29,6 +29,7 @@ export class HttpServer implements IHttpServer {
     }
 
     start(): void {
+        // TODO: Add a 404 handler here
         const httpPort = process.env.SERVER_PORT;
         this.httpServer = Http.createServer(this.driver).listen(httpPort);
         console.log("http server started at http://localhost:" + process.env.SERVER_PORT);
